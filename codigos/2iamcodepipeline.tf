@@ -35,6 +35,10 @@ data "aws_iam_policy_document" "cicd_pipeline_policies" {
     }
 }
 
+# similar a codebuild pero con otros permisos
+# codepipeline toma a codebuild y hace cosas xd
+# tambien del s3
+
 resource "aws_iam_policy" "cicd_pipeline_policy" {
     name = "cicd_pipeline_policy"
     path = "/"
@@ -47,3 +51,4 @@ resource "aws_iam_role_policy_attachment" "cicd_pipeline_attachment" {
     role = aws_iam_role.assume_codepipeline_role.id
 }
 
+# estos ultimos dos son para decirle a terraform como unir roles y permisos

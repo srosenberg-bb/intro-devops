@@ -19,6 +19,8 @@ resource "aws_iam_role" "assume_codebuild_role" {
   EOF
 
 }
+# quien asume el rol
+
 data "aws_iam_policy_document" "cicd_build_policies" {
     statement{
         sid = ""
@@ -27,6 +29,8 @@ data "aws_iam_policy_document" "cicd_build_policies" {
         effect = "Allow"
     }
 }
+
+# que permisos tiene
 
 resource "aws_iam_policy" "cicd_build_policy" {
     name = "cicd_build_policy"
@@ -44,3 +48,4 @@ resource "aws_iam_role_policy_attachment" "cicd_codebuild_attachment2" {
     policy_arn  = "arn:aws:iam::aws:policy/PowerUserAccess"
     role        = aws_iam_role.assume_codebuild_role.id
 }
+

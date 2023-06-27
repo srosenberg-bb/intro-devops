@@ -1,7 +1,7 @@
 resource "aws_codebuild_project" "plan" {
   name          = "cicd-plan"
   description   = "Plan stage for terraform"
-  service_role  = aws_iam_role.assume_codebuild_role.arn
+  service_role  = aws_iam_role.assume_codebuild_role.arn # rol creado
 
   artifacts {
     type = "CODEPIPELINE"
@@ -13,13 +13,13 @@ resource "aws_codebuild_project" "plan" {
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "SERVICE_ROLE"
     registry_credential{
-        credential = aws_secretsmanager_secret.dockerhubconnection.arn
+        credential = aws_secretsmanager_secret.dockerhubconnection.arn # archivo de secretos
         credential_provider = "SECRETS_MANAGER"
     }
  }
  source {
      type   = "CODEPIPELINE"
-     buildspec = file("buildspec/plan-buildspec.yml")
+     buildspec = file("buildspec/plan-buildspec.yml") # comandos que vamos a ejecutar
  }
 }
 
@@ -44,7 +44,7 @@ resource "aws_codebuild_project" "apply" {
  }
  source {
      type   = "CODEPIPELINE"
-     buildspec = file("buildspec/apply-buildspec.yml")
+     buildspec = file("buildspec/apply-buildspec.yml") 
  }
 }
 
